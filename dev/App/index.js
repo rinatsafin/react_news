@@ -14,16 +14,14 @@ class App extends React.Component {
           localStorage.setItem("news", JSON.stringify(NEWS));
           news.push(NEWS.slice());
         } else
-          news.push([
-            {
-              id: Date.now(),
-              title: "no notes yet :(",
-              date: "",
-              display: false,
-              author: "",
-              text: ""
-            }
-          ]);
+          news.push({
+            id: Date.now(),
+            title: "no notes yet :(",
+            date: "",
+            display: false,
+            author: "",
+            text: ""
+          });
         return news;
       }
     };
