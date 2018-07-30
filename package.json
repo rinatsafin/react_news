@@ -4,7 +4,9 @@
   "description": "News site",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --content-base prod --debug --port 8080",
+    "build": "nnpm i && cross-env NODE_ENV=production webpack"
   },
   "repository": {
     "type": "git",

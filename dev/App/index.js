@@ -6,6 +6,7 @@ import NewsList from "../NewsList";
 class App extends React.Component {
   constructor() {
     super();
+
     this.state = {
       news: function() {
         const news = JSON.parse(localStorage.getItem("news")) || [];
@@ -26,6 +27,37 @@ class App extends React.Component {
         return news;
       }
     };
+
+    this.hideNews = this.hideNews.bind(this);
+    this.showHiddenNews = this.showHiddenNews.bind(this);
+    this.hideNewsHandler = this.hideNewsHandler.bind(this);
+    this.addNews = this.addNews.bind(this);
+    this.removeNews = this.removeNews.bind(this);
+    this.changeNews = this.removeNews.bind(this);
+    this.showHiddenNewsHandler = this.showHiddenNewsHandler.bind(this);
+  }
+
+  hideNews() {
+    const news = JSON.parse(localStorage.getItem("news"));
+    if (!Array.isArray(news) && !news.length) return;
+    return news.map(item => {
+      if (item.display) item.display = !item.display;
+      return item;
+    });
+  }
+
+  showHiddenNews(count) {
+    const news = JSON.parse(localStorage.getItem("news"));
+    if (!Array.isArray(news) && !news.length) return;
+    const checkType = typeof count == "undefined";
+    if (news.length < count) count = news.length;
+    return news.map(item => {
+      if (!item.display && (count > 0 || checkType)) {
+        if (!checkType) count--;
+        item.display = !item.display;
+      }
+      return item;
+    });
   }
 
   componentWillMount() {
