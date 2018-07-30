@@ -1,0 +1,226 @@
+*,
+html,
+body {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+body {
+  background: #eee;
+}
+
+.app {
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.app__header {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.notesList {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.news-wrapper {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  padding: 20px;
+  background: #ddd;
+  width: 80%;
+  margin: 0 auto;
+  margin: 20px auto;
+  border-radius: 5px;
+}
+
+.main-content {
+  -webkit-box-ordinal-group: 2;
+  -moz-box-ordinal-group: 2;
+  -ms-flex-order: 2;
+  -webkit-order: 2;
+  order: 2;
+  width: 60%;
+  -moz-box-flex: 1;
+}
+
+.nav,
+.sidebar {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  width: 20%;
+  -ms-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+}
+
+.nav {
+  -webkit-box-ordinal-group: 1;
+  -moz-box-ordinal-group: 1;
+  -ms-flex-order: 1;
+  -webkit-order: 1;
+  order: 1;
+}
+
+.nav h2 {
+  margin: 5px auto 10px;
+}
+
+.nav button,
+.form__add_news button,
+.news-change button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  outline: none;
+  border-radius: 2px;
+  border: none;
+  box-shadow: 0px 2px 4px 0 #7d6d6d;
+}
+
+.nav li {
+  margin: 0 auto 10px;
+}
+
+.nav li:last-child {
+  margin: 0 auto;
+}
+
+.form__add_news button:hover,
+.news-change button:hover,
+.nav button:hover {
+  background: #7c7d7d7a;
+  cursor: pointer;
+}
+
+.sidebar {
+  -webkit-box-ordinal-group: 3;
+  -moz-box-ordinal-group: 3;
+  -ms-flex-order: 3;
+  -webkit-order: 3;
+  order: 3;
+}
+
+.main-content,
+.sidebar,
+.nav {
+  padding: 1em;
+}
+
+.news-item {
+  border: 1px solid #fff;
+  background: #f1f1f1;
+  padding: 15px 10px;
+  box-shadow: 0px 2px 4px 0 #7d6d6d;
+  margin: 10px auto;
+  border-radius: 2px;
+  position: relative;
+}
+
+.form__add_news {
+  width: 30%;
+  margin: 0 auto;
+}
+
+.form__add_news input,
+.form__add_news button,
+.form__add_news textarea,
+.news-change button,
+.news-change input {
+  display: block;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.form__add_news input,
+.form__add_news button,
+.form__add_news textarea {
+  width: 100%;
+}
+
+.news-change input {
+  width: 60%;
+}
+
+.form__add_news button,
+.news-change button {
+  font-size: 14px;
+  margin: 5px auto 0;
+}
+
+.checkbox_label {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px;
+}
+
+.checkbox_label,
+.news-change .form__checkbox,
+.form__add_news .form__checkbox {
+  display: inline-block;
+  width: auto;
+}
+
+.checkbox_wrapper {
+  text-align: center;
+  margin: 10px auto;
+}
+
+.news-change button {
+  width: 30%;
+  clear: both;
+}
+
+.news-author,
+.header__title {
+  font-size: 16px;
+}
+
+.header__title {
+  font-weight: bold;
+}
+
+.header__date {
+  font-size: 10px;
+  color: #989898;
+}
+
+.news__action {
+  position: absolute;
+  right: 0px;
+  top: -2px;
+}
+
+.news__action button {
+  padding: 1px;
+  font-size: 10px;
+  border: 0;
+  border-radius: 2px;
+  background: #f1f1f1;
+}
+
+.news__action button:hover {
+  cursor: pointer;
+  background: #7d6d6d;
+  color: #fff;
+  border: 0;
+}
+
+.action__edit {
+  margin-right: 3px;
+}
