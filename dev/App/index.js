@@ -4,35 +4,22 @@ import Form from "../Form";
 import NewsList from "../NewsList";
 
 class App extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
+    const news = JSON.parse(localStorage.getItem("news")) || [];
+    if (!news.length && props.news.length) {
+      localStorage.setItem("news", JSON.stringify(props.news));
+      news.push(props.news.slice());
+    } else news.push({ id: Date.now(), title: "no notes yet :(", date: "", display: false, author: "", text: "" });
 
-    this.state = {
-      news: function() {
-        const news = JSON.parse(localStorage.getItem("news")) || [];
-        if (!news.length && NEWS.length) {
-          localStorage.setItem("news", JSON.stringify(NEWS));
-          news.push(NEWS.slice());
-        } else
-          news.push({
-            id: Date.now(),
-            title: "no notes yet :(",
-            date: "",
-            display: false,
-            author: "",
-            text: ""
-          });
-        return news;
-      }
-    };
+    this.state = { news };
 
     this.hideNews = this.hideNews.bind(this);
     this.showHiddenNews = this.showHiddenNews.bind(this);
     this.hideNewsHandler = this.hideNewsHandler.bind(this);
     this.addNews = this.addNews.bind(this);
     this.removeNews = this.removeNews.bind(this);
-    this.changeNews = this.removeNews.bind(this);
-    this.showHiddenNewsHandler = this.showHiddenNewsHandler.bind(this);
+    this.changeNews = this.changeNews.bind(this);
   }
 
   hideNews() {
@@ -69,11 +56,11 @@ class App extends React.Component {
   }
 
   showHiddenNewsHandler(count) {
-    this.setState({ news: showHiddenNews(count) });
+    this.setState({ news: this.showHiddenNews(count) });
   }
 
   hideNewsHandler() {
-    this.setState({ news: hideNews(this.state.news) });
+    this.setState({ news: this.hideNews(this.state.news) });
   }
 
   addNews(news) {
@@ -83,17 +70,9 @@ class App extends React.Component {
   }
 
   removeNews(id) {
-    const list = this.state.news.filter(news => news.id !== id);
-    if (!list.length)
-      list.push({
-        id: Date.now(),
-        title: "no notes yet :(",
-        date: "",
-        display: false,
-        author: "",
-        text: ""
-      });
-    this.setState({ news: list });
+    const news = this.state.news.filter(news => news.id !== id);
+    if (!news.length) news.push({ id: Date.now(), title: "no notes yet :(", date: "", display: false, author: "", text: "" });
+    this.setState({ news });
   }
 
   changeNews(objNews) {
