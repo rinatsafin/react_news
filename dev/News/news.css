@@ -1,0 +1,108 @@
+.change button {
+  width: 100%;
+  font-size: 16px;
+  outline: none;
+  border-radius: 2px;
+  border: none;
+  box-shadow: 0px 2px 4px 0 #7d6d6d;
+}
+
+.change button:hover {
+  background: #7c7d7d7a;
+  cursor: pointer;
+}
+
+.item {
+  border: 1px solid #fff;
+  background: #f1f1f1;
+  padding: 15px 10px;
+  box-shadow: 0px 2px 4px 0 #7d6d6d;
+  margin: 10px auto;
+  border-radius: 2px;
+  position: relative;
+}
+
+.change button,
+.change input {
+  display: block;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.change input {
+  width: 60%;
+}
+
+.change button {
+  font-size: 14px;
+  margin: 5px auto 0;
+}
+
+.checkbox_label {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px;
+}
+
+.checkbox_label,
+.change .checkbox {
+  display: inline-block;
+  width: auto;
+}
+
+.checkbox_wrapper {
+  text-align: center;
+  margin: 10px auto;
+}
+
+.change button {
+  width: 30%;
+  clear: both;
+}
+
+.author,
+.header__title {
+  font-size: 16px;
+}
+
+.header__title {
+  font-weight: bold;
+}
+
+.header__date {
+  font-size: 10px;
+  color: #989898;
+}
+
+.action {
+  position: absolute;
+  right: 0px;
+  top: -2px;
+}
+
+.action button {
+  padding: 1px;
+  font-size: 10px;
+  border: 0;
+  border-radius: 2px;
+  background: #f1f1f1;
+}
+
+.action button:hover {
+  cursor: pointer;
+  background: #7d6d6d;
+  color: #fff;
+  border: 0;
+}
+
+.action__edit {
+  margin-right: 3px;
+}
+
+.prew {
+  display: block;
+  float: left;
+  max-width: 100%;
+  width: 65px;
+  margin: 5px 10px 0 0;
+}

@@ -1,18 +1,29 @@
 import React from "react";
-
+import PropTypes from "prop-types";
 import Form from "../Form";
 import NewsList from "../NewsList";
+
+import styles from "./app.css";
 
 class App extends React.Component {
   constructor(props) {
     super();
-    const news = JSON.parse(localStorage.getItem("news")) || [];
+    const news = JSON.parse(window.localStorage.getItem("news")) || [];
     if (!news.length && props.news.length) {
-      localStorage.setItem("news", JSON.stringify(props.news));
+      window.localStorage.setItem("news", JSON.stringify(props.news));
       news.push(props.news.slice());
-    } else news.push({ id: Date.now(), title: "no notes yet :(", date: "", display: false, author: "", text: "" });
+    } else {
+      news.push({
+        id: Date.now(),
+        title: "no notes yet :(",
+        date: "",
+        display: false,
+        author: "",
+        text: "",
+      });
+    }
 
-    this.state = { news };
+    this.state = { news, };
 
     this.hideNews = this.hideNews.bind(this);
     this.showHiddenNews = this.showHiddenNews.bind(this);
@@ -22,8 +33,19 @@ class App extends React.Component {
     this.changeNews = this.changeNews.bind(this);
   }
 
+  componentWillMount() {
+    const news = JSON.parse(window.localStorage.getItem("news"));
+    if (news) this.setState({ news, });
+  }
+
+  componentDidUpdate() {
+    const { news, } = this.state;
+    const newsUpdated = JSON.stringify(news);
+    window.localStorage.setItem("news", newsUpdated);
+  }
+
   hideNews() {
-    const news = JSON.parse(localStorage.getItem("news"));
+    const news = JSON.parse(window.localStorage.getItem("news"));
     if (!Array.isArray(news) && !news.length) return;
     return news.map(item => {
       if (item.display) item.display = !item.display;
@@ -32,7 +54,7 @@ class App extends React.Component {
   }
 
   showHiddenNews(count) {
-    const news = JSON.parse(localStorage.getItem("news"));
+    const news = JSON.parse(window.localStorage.getItem("news"));
     if (!Array.isArray(news) && !news.length) return;
     const checkType = typeof count == "undefined";
     if (news.length < count) count = news.length;
@@ -45,49 +67,44 @@ class App extends React.Component {
     });
   }
 
-  componentWillMount() {
-    const news = JSON.parse(localStorage.getItem("news"));
-    if (news) this.setState({ news });
-  }
-
-  componentDidUpdate() {
-    const news = JSON.stringify(this.state.news);
-    localStorage.setItem("news", news);
-  }
-
   showHiddenNewsHandler(count) {
-    this.setState({ news: this.showHiddenNews(count) });
+    this.setState({ news: this.showHiddenNews(count), });
   }
 
   hideNewsHandler() {
-    this.setState({ news: this.hideNews(this.state.news) });
+    const { news, } = this.state;
+    this.setState({ news: this.hideNews(news), });
   }
 
   addNews(news) {
-    const currentNewsList = this.state.news;
-    if (this.state.news[0].title == "no notes yet :(") currentNewsList.shift();
-    this.setState({ news: [news, ...currentNewsList] });
+    const { currentNewsList, }= this.state;
+    if (currentNewsList[0].title == "no notes yet :(") currentNewsList.shift();
+    this.setState({ news: [news, ...currentNewsList, ], });
   }
 
   removeNews(id) {
-    const news = this.state.news.filter(news => news.id !== id);
-    if (!news.length) news.push({ id: Date.now(), title: "no notes yet :(", date: "", display: false, author: "", text: "" });
-    this.setState({ news });
+    const { news, } = this.state;
+    const newsRemoved = news.filter(news => news.id !== id);
+    if (!news.length) news.push({ id: Date.now(), title: "no notes yet :(", date: "", display: false, author: "", text: "", });
+    this.setState({ news: newsRemoved, });
   }
 
   changeNews(objNews) {
-    const news = this.state.news.map(newsItem => {
+    const { news, } = this.state;
+    const newsChanged = news.map(newsItem => {
       if (newsItem.id === objNews.id) return objNews;
       return newsItem;
     });
-    this.setState({ news });
+    this.setState({ news: newsChanged, });
   }
 
   render() {
-    const { news } = this.state;
+    const { news, } = this.state;
     return (
-      <div className="app">
-        <h1 className="app__header">Create News</h1>
+      <div className={styles.app}>
+        <h1 className={styles.app__header}>
+          Create News
+        </h1>
 
         <Form handleNewsItem={this.addNews} />
         <NewsList
@@ -100,6 +117,10 @@ class App extends React.Component {
       </div>
     );
   }
+}
+
+App.propTypes = {
+  news: PropTypes.array.isRequired,
 }
 
 export default App;

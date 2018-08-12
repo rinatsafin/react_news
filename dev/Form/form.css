@@ -1,0 +1,50 @@
+.add_news button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  outline: none;
+  border-radius: 2px;
+  border: none;
+  box-shadow: 0px 2px 4px 0 #7d6d6d;
+}
+
+.add_news button:hover {
+  background: #7c7d7d7a;
+  cursor: pointer;
+}
+
+.add_news {
+  width: 30%;
+  margin: 0 auto;
+}
+
+.add_news input,
+.add_news button,
+.add_news textarea {
+  display: block;
+  margin: 0 auto;
+  padding: 10px;
+  width: 100%;
+}
+
+.add_news button {
+  font-size: 14px;
+  margin: 5px auto 0;
+}
+
+.checkbox_label {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px;
+}
+
+.checkbox_label,
+.add_news .checkbox {
+  display: inline-block;
+  width: auto;
+}
+
+.checkbox_wrapper {
+  composes: checkbox_wrapper from "../News/news.css";
+}

@@ -1,10 +1,13 @@
 import React from "react";
+import PropTypes from "prop-types";
+import styles from "./form.css";
 
 class Form extends React.Component {
+
   constructor() {
     super();
 
-    this.state = { title: "", date: "", display: true, author: "", text: "" };
+    this.state = { title: "", date: "", display: true, author: "", text: "", };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -13,22 +16,12 @@ class Form extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    if (
-      this.state.title &&
-      this.state.date &&
-      this.state.author &&
-      this.state.text
-    ) {
-      const nextNews = {
-        id: Date.now(),
-        title: this.state.title,
-        date: this.state.date,
-        display: this.state.display,
-        author: this.state.author,
-        text: this.state.text
-      };
+    const {title, date, display, author, text, } = this.state;
+    const { handleNewsItem, } = this.props;
+    if (title && date && author && text) {
+      const nextNews = { id: Date.now(), title, date, display,author, text, };
 
-      this.props.handleNewsItem(nextNews);
+      handleNewsItem(nextNews);
       this.clearText();
     }
   }
@@ -37,29 +30,21 @@ class Form extends React.Component {
     const target = e.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
-    this.setState({
-      [name]: value
-    });
+    this.setState({ [name]: value, });
   }
 
   clearText() {
-    this.setState({
-      title: "",
-      date: "",
-      display: true,
-      author: "",
-      text: ""
-    });
+    this.setState({ title: "", date: "", display: true, author: "", text: "", });
   }
 
   render() {
-    const { title, date, display, author, text } = this.state;
+    const { title, date, display, author, text, } = this.state;
     return (
-      <form className="form__add_news" onSubmit={this.handleSubmit}>
+      <form className={styles.add_news} onSubmit={this.handleSubmit}>
         <input
           type="text"
           name="title"
-          className="form__title"
+          className={styles.title}
           placeholder="Enter News Title"
           value={title}
           onChange={this.handleInputChange}
@@ -67,7 +52,7 @@ class Form extends React.Component {
         <input
           type="text"
           name="date"
-          className="form__date"
+          className={styles.date}
           placeholder="Enter News Date format: M d, Y"
           value={date}
           onChange={this.handleInputChange}
@@ -75,7 +60,7 @@ class Form extends React.Component {
         <input
           type="text"
           name="author"
-          className="form__author"
+          className={styles.author}
           placeholder="Enter News Author name"
           value={author}
           onChange={this.handleInputChange}
@@ -83,26 +68,34 @@ class Form extends React.Component {
         <textarea
           placeholder="Write News Text"
           name="text"
-          className="form__textarea"
+          className={styles.textarea}
           value={text}
           rows="5"
           onChange={this.handleInputChange}
         />
-        <div className="checkbox_wrapper">
-          <label className="checkbox_label">Show this News?</label>
+        <div className={styles.checkbox_wrapper}>
+          <div className={styles.checkbox_label}>
+            Show this News?
+          </div>
           <input
             type="checkbox"
             name="display"
-            className="form__checkbox"
+            className={styles.checkbox}
             value={display}
             checked={display}
             onChange={this.handleInputChange}
           />
         </div>
-        <button className="form__button">Save News</button>
+        <button className={styles.button} type="button">
+          Save News
+        </button>
       </form>
     );
   }
 }
+
+Form.propTypes = {
+  handleNewsItem: PropTypes.func.isRequired,
+};
 
 export default Form;
