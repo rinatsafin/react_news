@@ -5,7 +5,7 @@ import News from "../News";
 import styles from "./newslist.css";
 
 const NewsList = props => {
-  const { news, changeNews, removeNews, showNews, hideNews, } = props;
+  const { news, removeNews, changeNews, hideNews, showNews, } = props;
   return (
     <div className={styles.news_wrapper}>
       <nav className={styles.nav}>
@@ -58,10 +58,10 @@ const NewsList = props => {
 
 NewsList.propTypes = {
   news: PropTypes.array.isRequired,
-  changeNews: PropTypes.func.isRequired,
   removeNews: PropTypes.func.isRequired,
-  showNews: PropTypes.func.isRequired,
+  changeNews: PropTypes.func.isRequired,
   hideNews: PropTypes.func.isRequired,
+  showNews: PropTypes.func.isRequired,
 };
 
 export default NewsList;

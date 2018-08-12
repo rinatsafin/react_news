@@ -86,7 +86,7 @@ class Form extends React.Component {
             onChange={this.handleInputChange}
           />
         </div>
-        <button className={styles.button} type="button">
+        <button className={styles.button} type="submit">
           Save News
         </button>
       </form>

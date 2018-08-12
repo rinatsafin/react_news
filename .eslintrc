@@ -33,6 +33,7 @@
     "no-console": 1,
     "no-unexpected-multiline": "warn",
     "react/forbid-prop-types": [1, { "forbid": ["array"], "checkContextTypes": false, "checkChildContextTypes": false }],
+    "react/destructuring-assignment": [0, "always", { "ignoreClassFields": 0 }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/prefer-stateless-function": [
       0,

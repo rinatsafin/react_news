@@ -16,8 +16,8 @@ class News extends React.Component {
     e.preventDefault();
     const { title, date, display, author, text, } = this.state;
     const { id, change, } = this.props;
-    const changeNews = { id, title, date, display, author, text, };
-    change(changeNews);
+    const changedNews = { id, title, date, display, author, text, };
+    change(changedNews);
 
     this.setState({ isChange: false, });
   }
@@ -29,10 +29,9 @@ class News extends React.Component {
 
   render() {
     const { id, remove, title, date, author, text, } = this.props;
-    const { isChange, sId, sTitle, sDate, sDisplay, sAuthor, sText, } = this.state;
     return (
       <section className={styles.item}>
-        {isChange ? (
+        {this.state.isChange ? (
           <form onSubmit={this.changeNews} className={styles.change}>
             <input
               onChange={e =>
@@ -41,7 +40,7 @@ class News extends React.Component {
                 })
               }
               type="text"
-              value={sTitle}
+              value={this.state.title}
             />
             <input
               onChange={e =>
@@ -50,7 +49,7 @@ class News extends React.Component {
                 })
               }
               type="text"
-              value={sDate}
+              value={this.state.date}
             />
             <input
               onChange={e =>
@@ -59,7 +58,7 @@ class News extends React.Component {
                 })
               }
               type="text"
-              value={sAuthor}
+              value={this.state.author}
             />
             <input
               onChange={e =>
@@ -68,7 +67,7 @@ class News extends React.Component {
                 })
               }
               type="text"
-              value={sText}
+              value={this.state.text}
             />
             <div className={styles.checkbox_wrapper}>
               <div className={styles.checkbox_label}>
@@ -76,16 +75,17 @@ class News extends React.Component {
               </div>
               <input
                 className={styles.checkbox}
-                id={sId}
-                name={sId}
+                id={this.state.id}
+                name={this.state.id}
                 onChange={() => {
-                  this.setState({ display: !sDisplay, });
+                  const { display, } = this.state;
+                  this.setState({ display: !display, });
                 }}
                 type="checkbox"
-                checked={sDisplay}
+                checked={this.state.display}
               />
             </div>
-            <button type="button">
+            <button type="submit">
               save
             </button>
           </form>
@@ -96,14 +96,14 @@ class News extends React.Component {
                 className={styles.action__edit}
                 id={id}
                 onClick={this.handleChange}
-                type="button"
+                type="submit"
               >
                 (e)dit
               </button>
               <button
                 className={styles.action__remove}
                 onClick={() => remove(id)}
-                type="button"
+                type="submit"
               >
                 remove (x)
               </button>

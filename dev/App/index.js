@@ -8,20 +8,11 @@ import styles from "./app.css";
 class App extends React.Component {
   constructor(props) {
     super();
-    const news = JSON.parse(window.localStorage.getItem("news")) || [];
+    const news = JSON.parse(localStorage.getItem("news")) || [];
     if (!news.length && props.news.length) {
-      window.localStorage.setItem("news", JSON.stringify(props.news));
+      localStorage.setItem("news", JSON.stringify(props.news));
       news.push(props.news.slice());
-    } else {
-      news.push({
-        id: Date.now(),
-        title: "no notes yet :(",
-        date: "",
-        display: false,
-        author: "",
-        text: "",
-      });
-    }
+    } else news.push({ id: Date.now(), title: "no notes yet :(", date: "", display: false, author: "", text: "",});
 
     this.state = { news, };
 
@@ -34,18 +25,17 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    const news = JSON.parse(window.localStorage.getItem("news"));
+    const news = JSON.parse(localStorage.getItem("news"));
     if (news) this.setState({ news, });
   }
 
   componentDidUpdate() {
     const { news, } = this.state;
-    const newsUpdated = JSON.stringify(news);
-    window.localStorage.setItem("news", newsUpdated);
+    localStorage.setItem("news", JSON.stringify(news));
   }
 
   hideNews() {
-    const news = JSON.parse(window.localStorage.getItem("news"));
+    const news = JSON.parse(localStorage.getItem("news"));
     if (!Array.isArray(news) && !news.length) return;
     return news.map(item => {
       if (item.display) item.display = !item.display;
@@ -54,7 +44,7 @@ class App extends React.Component {
   }
 
   showHiddenNews(count) {
-    const news = JSON.parse(window.localStorage.getItem("news"));
+    const news = JSON.parse(localStorage.getItem("news"));
     if (!Array.isArray(news) && !news.length) return;
     const checkType = typeof count == "undefined";
     if (news.length < count) count = news.length;
@@ -76,10 +66,10 @@ class App extends React.Component {
     this.setState({ news: this.hideNews(news), });
   }
 
-  addNews(news) {
-    const { currentNewsList, }= this.state;
-    if (currentNewsList[0].title == "no notes yet :(") currentNewsList.shift();
-    this.setState({ news: [news, ...currentNewsList, ], });
+  addNews(currentNews) {
+    const { news, } = this.state;
+    if (news[0].title == "no notes yet :(") news.shift();
+    this.setState({ news: [currentNews, ...news, ], });
   }
 
   removeNews(id) {
