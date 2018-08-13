@@ -29,9 +29,10 @@ class News extends React.Component {
 
   render() {
     const { id, remove, title, date, author, text, } = this.props;
+    const { isChange, id: sId, date: sDate, display, author: sAuthor, title: sTitle, text: sText,} = this.state;
     return (
       <section className={styles.item}>
-        {this.state.isChange ? (
+        { isChange ? (
           <form onSubmit={this.changeNews} className={styles.change}>
             <input
               onChange={e =>
@@ -40,7 +41,7 @@ class News extends React.Component {
                 })
               }
               type="text"
-              value={this.state.title}
+              value={sTitle}
             />
             <input
               onChange={e =>
@@ -49,7 +50,7 @@ class News extends React.Component {
                 })
               }
               type="text"
-              value={this.state.date}
+              value={sDate}
             />
             <input
               onChange={e =>
@@ -58,7 +59,7 @@ class News extends React.Component {
                 })
               }
               type="text"
-              value={this.state.author}
+              value={sAuthor}
             />
             <input
               onChange={e =>
@@ -67,7 +68,7 @@ class News extends React.Component {
                 })
               }
               type="text"
-              value={this.state.text}
+              value={sText}
             />
             <div className={styles.checkbox_wrapper}>
               <div className={styles.checkbox_label}>
@@ -75,14 +76,13 @@ class News extends React.Component {
               </div>
               <input
                 className={styles.checkbox}
-                id={this.state.id}
-                name={this.state.id}
+                id={sId}
+                name={sId}
                 onChange={() => {
-                  const { display, } = this.state;
                   this.setState({ display: !display, });
                 }}
                 type="checkbox"
-                checked={this.state.display}
+                checked={display}
               />
             </div>
             <button type="submit">
